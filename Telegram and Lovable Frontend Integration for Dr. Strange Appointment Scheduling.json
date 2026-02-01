@@ -1,0 +1,427 @@
+{
+  "name": "Telegram and Lovable Frontend Integration for Dr. Strange Appointment Scheduling",
+  "nodes": [
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "59670bf9-ddcd-4ef8-b46a-c2075650e47b",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        96
+      ],
+      "webhookId": "a84ee909-44e7-4de7-816e-d473aff29f5c",
+      "credentials": {
+        "telegramApi": {
+          "id": "A8mWBceMyTkYAxwW",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "0341acb2-9d4f-4a02-9022-0314627ef006",
+        "options": {}
+      },
+      "id": "feeee9b0-e6fb-435d-a4f4-f7bad8b13c4c",
+      "name": "Webhook - Lovable Form",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        432
+      ],
+      "webhookId": "0341acb2-9d4f-4a02-9022-0314627ef006"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "016d126a-c609-4dd9-b2f5-69f8ca664ed7",
+      "name": "Parse Telegram Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        96
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c877b6d9-bd81-42a5-8c43-fd8afda1d0a1",
+      "name": "Parse Telegram Appointment Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "905455e3-3167-49a3-b974-71acfb861ade",
+      "name": "Validate Webhook Payload",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        896,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3bb61d21-5e18-4ae4-86ac-91bbb70feca4",
+      "name": "Validate Telegram Appointment",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        672,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6c20bbe0-1294-4d7e-94f1-cf36d62aa11c",
+      "name": "Add Timestamp",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        240
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "5bd2a507-84ea-4e51-9af4-a119c2e7969e",
+      "name": "Generate Appointment ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "id": "b0a81c31-ad49-4587-87b1-a1953139e034",
+      "name": "Store Appointment",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1568,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "6b11648f-f707-4b8f-ab76-addb15b45f0a",
+      "name": "Prepare Webhook Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1792,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "762faf5f-52ba-4872-bb3d-b90c21e56df0",
+      "name": "Send Success to Lovable",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2016,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "87f194e9-ec11-412c-a673-20d3e405fb25",
+      "name": "Prepare Webhook Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "04b1ae8f-fe65-4a44-b2f3-1f7002662670",
+      "name": "Send Error to Lovable",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1344,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "36dfaadb-29fa-4295-90cd-e2e92000edb1",
+      "name": "Send Telegram Confirmation",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2016,
+        240
+      ],
+      "webhookId": "dfb98bb5-705f-441e-bbfc-e9658a5d8e41",
+      "credentials": {
+        "telegramApi": {
+          "id": "A8mWBceMyTkYAxwW",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "id": "ca638ec1-b02a-449b-b15f-479fc8b3f426",
+      "name": "Send Telegram Error",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        0
+      ],
+      "webhookId": "0a9919cd-85d8-4130-abdf-64ea783ebe03",
+      "credentials": {
+        "telegramApi": {
+          "id": "A8mWBceMyTkYAxwW",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "00fc2bae-8fa8-439a-87fb-66fa08654b3e",
+      "name": "Merge Telegram Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2f6d7167-effa-44a9-bf03-e158e7a0f934",
+      "name": "Send Email Confirmation",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2016,
+        432
+      ],
+      "webhookId": "611b0574-6480-4987-86e9-fa52899382a2",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "JAaxm1cAf5fI9O8O",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Parse Telegram Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Telegram Message": {
+      "main": [
+        [
+          {
+            "node": "Parse Telegram Appointment Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Telegram Appointment Request": {
+      "main": [
+        [
+          {
+            "node": "Validate Telegram Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Telegram Appointment": {
+      "main": [
+        [
+          {
+            "node": "Merge Telegram Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Telegram Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Lovable Form": {
+      "main": [
+        [
+          {
+            "node": "Validate Webhook Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Webhook Payload": {
+      "main": [
+        [
+          {
+            "node": "Add Timestamp",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Webhook Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Telegram Data": {
+      "main": [
+        [
+          {
+            "node": "Add Timestamp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Timestamp": {
+      "main": [
+        [
+          {
+            "node": "Generate Appointment ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Appointment ID": {
+      "main": [
+        [
+          {
+            "node": "Store Appointment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Appointment": {
+      "main": [
+        [
+          {
+            "node": "Prepare Webhook Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Webhook Success Response": {
+      "main": [
+        [
+          {
+            "node": "Send Success to Lovable",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Telegram Confirmation",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Email Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Webhook Error Response": {
+      "main": [
+        [
+          {
+            "node": "Send Error to Lovable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "e42c979c-cc40-4306-92cc-d675b65e2d9e",
+  "meta": {
+    "instanceId": "1adf2326d259e35c14a1d925a0ef9c4b7067b1b3059009ee83a5f7c1368c7c9f"
+  },
+  "id": "E15fqkycWdUp2Xzk0XDNX",
+  "tags": []
+}
